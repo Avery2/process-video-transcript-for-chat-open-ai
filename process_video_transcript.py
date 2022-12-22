@@ -28,7 +28,7 @@ with open('timestamps.txt') as f:
     timestamp, title = line.split(' ')[0], ' '.join(list(filter(lambda x: x.strip() not in DISALLOWED_CHARACTERS, line.split(' ')[1:]))).strip()
     timestamped_titles.append((timestamp, title))
 if DISABLE_TIMESTAMP_SECTIONS:
-  timestamped_titles = ['00:00', 'Default Title']
+  timestamped_titles = [('00:00', 'Default Title')]
 
 timestamped_titles.sort(key=lambda x: x[0], reverse=True)
 
