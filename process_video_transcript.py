@@ -1,5 +1,7 @@
 import re
 
+DISALLOWED_CHARACTERS = set(['-', '*', ''])
+
 def isTimestamp(s):
   timestamp_regex = r'\d{1,2}:{1,2}'
   return re.match(timestamp_regex, s.strip()) != None
@@ -14,6 +16,8 @@ def addLeadingDigit(timestamps):
 with open('timestamps.txt') as f:
   lines = f.readlines()
   # assumes timestamp structure
+  for line in lines:
+    timestamp, title = line.split(' ')[0], ' '.join(list(filter(lambda x: x.strip() not in DISALLOWED_CHARACTERS, line.split(' ')[1:]))).strip()
 
 with open('input.txt') as f:
   # setup
@@ -22,4 +26,4 @@ with open('input.txt') as f:
   timestamps = addLeadingDigit([l.strip() for l in lines if isTimestamp(l)])
 
   transcript_oneline = ' '.join([l.strip() for l in lines if not isTimestamp(l)])
-  print(transcript_oneline)
+  # print(transcript_oneline)
