@@ -1,7 +1,7 @@
 import re
 
 DISALLOWED_CHARACTERS = set(['-', '*', ''])
-DISABLE_TIMESTAMP = False
+DISABLE_TIMESTAMP_SECTIONS = False
 
 def isTimestamp(s):
   timestamp_regex = r'\d{1,2}:{1,2}'
@@ -27,7 +27,7 @@ with open('timestamps.txt') as f:
   for line in lines:
     timestamp, title = line.split(' ')[0], ' '.join(list(filter(lambda x: x.strip() not in DISALLOWED_CHARACTERS, line.split(' ')[1:]))).strip()
     timestamped_titles.append((timestamp, title))
-if DISABLE_TIMESTAMP:
+if DISABLE_TIMESTAMP_SECTIONS:
   timestamped_titles = ['00:00', 'Default Title']
 
 timestamped_titles.sort(key=lambda x: x[0], reverse=True)
